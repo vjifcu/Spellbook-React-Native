@@ -1,49 +1,52 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import {Navigation} from 'react-native-navigation';
+import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import IconAwesome from 'react-native-vector-icons/FontAwesome';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import CompendiumScreen from './src/screens/Compendium/Compendium';
+import SpellbookScreen from './src/screens/Spellbook/Spellbook';
+import OptionsScreen from './src/screens/Options/Options';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+//Register Screens
+Navigation.registerComponent(
+  "project.CompendiumScreen", () =>
+  CompendiumScreen
+);
+Navigation.registerComponent(
+  "project.SpellbookScreen", () => 
+  SpellbookScreen
+);
+Navigation.registerComponent(
+  "project.OptionsScreen", () => 
+  OptionsScreen
+);
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+//Start a App
+Promise.all([
+  IconMaterial.getImageSource("library-books", 30),
+  IconEntypo.getImageSource("open-book", 30),
+  IconAwesome.getImageSource("gear", 30)
+]).then(sources => {
+  Navigation.startTabBasedApp({
+    tabs: [
+      {
+        screen: "project.CompendiumScreen",
+        label: "Compendium",
+        title: "Spell Compendium",
+        icon: sources[0]
+      },
+      {
+        screen: "project.SpellbookScreen",
+        label: "Spellbooks",
+        title: "Your Spellbooks",
+        icon: sources[1]
+      },
+      {
+        screen: "project.OptionsScreen",
+        label: "Options",
+        title: "Options",
+        icon: sources[2]
+      }
+    ]
+  });  
 });
