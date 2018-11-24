@@ -7,6 +7,8 @@ import CompendiumScreen from './src/screens/Compendium/Compendium';
 import SpellbookScreen from './src/screens/Spellbook/Spellbook';
 import OptionsScreen from './src/screens/Options/Options';
 
+import spells from './res/data_file.json';
+
 //Register Screens
 Navigation.registerComponent(
   "project.CompendiumScreen", () =>

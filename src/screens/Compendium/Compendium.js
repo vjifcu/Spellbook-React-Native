@@ -1,31 +1,32 @@
 import React, {Component} from 'react';
-import {View, Text, Button, SectionList} from 'react-native';
+import {View, Text, Button, SectionList, FlatList} from 'react-native';
+import ListItem from '../../components/ListItem';
+import ListHeader from '../../components/ListHeader';
+import spells from '../../../res/data_file.json';
+import notesData from '../../store/spellList'
 
 class Compendium extends Component {
+  
+      renderHeader(headerText){
+        if(headerText === "0"){
+            return "Cantrip";
+        }
+        return headerText;
+      }
 
-    render() {
+      render() {
         return (
-            <View style={{flex: 1}}>
-                <SectionList
-                renderItem={({item, index, section}) => <Text>{item}</Text>}
-                renderSectionHeader={({section: {title}}) => (
-                    <Text>{title}</Text>
-                )}
-                sections={[
-                    {title: 'Title1', data: ['item1', 'item2']},
-                    {title: 'Title2', data: ['item3', 'item4']},
-                    {title: 'Title4', data: ['item5', 'item6']},
-                    {title: 'Title5', data: ['item5', 'item6']},
-                    {title: 'Title6', data: ['item5', 'item6']},
-                    {title: 'Title7', data: ['item5', 'item6']},
-                    {title: 'Title8', data: ['item5', 'item6']},
-                    {title: 'Title9', data: ['item5', 'item6']}
-                ]}
-                keyExtractor={(item, index) => item + index}
+          <View>
+
+                <FlatList
+                  data={notesData}
+                  renderItem={({item}) => <Text style={{fontSize: 20, margin:2, padding:3, height:60, backgroundColor: '#EFEFEF'}}>{item.name}</Text>}
+                  keyExtractor={item => item.name}
                 />
-            </View>
+
+          </View>
         );
-    }
+      }
 }
 
 export default Compendium;
