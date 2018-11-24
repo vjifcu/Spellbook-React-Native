@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-const ListItem = (props) => (
-    <TouchableOpacity >
+const listItem = (props) => (
+    <TouchableOpacity onPress={props.onItemPressed}>
       <View style={styles.listItem}>
-        <Text>{props.placeName}</Text>
+        <Text>{props.spellName}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -25,5 +25,5 @@ const ListItem = (props) => (
     }
   });
   
-  export default ListItem;
+  export default listItem;
   

@@ -1,4 +1,7 @@
 import {Navigation} from 'react-native-navigation';
+import { Provider } from "react-redux";
+import { connect } from 'react-redux';
+
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAwesome from 'react-native-vector-icons/FontAwesome';
@@ -9,18 +12,28 @@ import OptionsScreen from './src/screens/Options/Options';
 
 import spells from './res/data_file.json';
 
+import configureStore from './src/store/configureStore';
+
+const store = configureStore();
+
 //Register Screens
 Navigation.registerComponent(
   "project.CompendiumScreen", () =>
-  CompendiumScreen
+  CompendiumScreen,
+  store,
+  Provider
 );
 Navigation.registerComponent(
   "project.SpellbookScreen", () => 
-  SpellbookScreen
+  SpellbookScreen,
+  store,
+  Provider
 );
 Navigation.registerComponent(
   "project.OptionsScreen", () => 
-  OptionsScreen
+  OptionsScreen,
+  store,
+  Provider
 );
 
 //Start a App

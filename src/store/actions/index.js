@@ -1,1 +1,1 @@
-export {addPlace, deletePlace} from './places';
+export {addSpell, deleteSpell} from './spells';
