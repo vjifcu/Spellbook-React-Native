@@ -9,10 +9,12 @@ import IconAwesome from 'react-native-vector-icons/FontAwesome';
 import CompendiumScreen from './src/screens/Compendium/Compendium';
 import SpellbookScreen from './src/screens/Spellbook/Spellbook';
 import OptionsScreen from './src/screens/Options/Options';
+import SpellDetailScreen from "./src/screens/SpellDetail/SpellDetail"
 
 import spells from './res/data_file.json';
 
 import configureStore from './src/store/configureStore';
+import spellDetail from './src/screens/SpellDetail/SpellDetail';
 
 const store = configureStore();
 
@@ -35,6 +37,10 @@ Navigation.registerComponent(
   store,
   Provider
 );
+Navigation.registerComponent(
+  "project.SpellDetailScreen", () =>
+  SpellDetailScreen
+)
 
 //Start a App
 Promise.all([

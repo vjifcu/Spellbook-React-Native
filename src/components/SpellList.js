@@ -8,10 +8,10 @@ const spellList = props => {
     <FlatList
       style={styles.listContainer}
       data={props.spells}
-      renderItem={({item}) => (
+      renderItem={(info) => (
         <ListItem
-          spellName={item.name}
-          onItemPressed={() => props.onItemSelected(item.name)}
+          spellName={info.item.name}
+          onItemPressed={() => props.onItemSelected(info.item.name)}
         />
       )}
       keyExtractor={item => item.name}
