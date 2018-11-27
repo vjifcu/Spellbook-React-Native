@@ -10,6 +10,7 @@ import CompendiumScreen from './src/screens/Compendium/Compendium';
 import SpellbookScreen from './src/screens/Spellbook/Spellbook';
 import OptionsScreen from './src/screens/Options/Options';
 import SpellDetailScreen from "./src/screens/SpellDetail/SpellDetail"
+import DrawerScreen from "./src/screens/Spellbook/Drawer"
 
 import spells from './res/data_file.json';
 
@@ -23,7 +24,7 @@ Navigation.registerComponent(
   "project.CompendiumScreen", () =>
   CompendiumScreen,
   store,
-  Provider
+  Provider,
 );
 Navigation.registerComponent(
   "project.SpellbookScreen", () => 
@@ -41,6 +42,12 @@ Navigation.registerComponent(
   "project.SpellDetailScreen", () =>
   SpellDetailScreen
 )
+Navigation.registerComponent(
+  "project.DrawerScreen", () =>
+  DrawerScreen,
+  store,
+  Provider
+)
 
 //Start a App
 Promise.all([
@@ -54,12 +61,12 @@ Promise.all([
         screen: "project.CompendiumScreen",
         label: "Compendium",
         title: "Spell Compendium",
-        icon: sources[0]
+        icon: sources[0],
       },
       {
         screen: "project.SpellbookScreen",
         label: "Spellbooks",
-        title: "Your Spellbooks",
+        title: "",
         icon: sources[1]
       },
       {
@@ -68,6 +75,12 @@ Promise.all([
         title: "Options",
         icon: sources[2]
       }
-    ]
+    ],
+    drawer: {
+      left: {
+        screen: "project.DrawerScreen",
+        title: "My Spellbooks"
+      }
+    }
   });  
 });

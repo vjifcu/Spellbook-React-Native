@@ -1,1 +1,1 @@
-export {addSpell, deleteSpell} from './spells';
+export {addSpell, deleteSpell, createSpellbook, deleteSpellbook, selectSpellbook, deselectSpellbook} from './spells';

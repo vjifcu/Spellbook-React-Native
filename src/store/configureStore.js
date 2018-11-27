@@ -3,7 +3,7 @@ import { createStore, combineReducers } from 'redux';
 import spellsReducer from './reducers/spells';
 
 const rootReducer = combineReducers({
-    spells: spellsReducer
+    rootReducer: spellsReducer
 });
 
 const configureStore = () => {

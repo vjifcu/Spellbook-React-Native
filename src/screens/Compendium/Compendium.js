@@ -31,7 +31,7 @@ class Compendium extends Component {
 
 const mapStateToProps = state => {
   return {
-    spells: state.spells.spells
+    spells: state.rootReducer.spells
   };
 };
 
