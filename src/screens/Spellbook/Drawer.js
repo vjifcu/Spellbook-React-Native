@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { selectSpellbook } from '../../store/actions/index';
 
 import SpellList from '../../components/SpellList';
+import SpellbookList from '../../components/SpellbookList';
 
 class Spellbook extends Component{
     itemSelectedHandler = key => {
@@ -18,8 +19,11 @@ class Spellbook extends Component{
         return(
                 <View style={[styles.container,{width: Dimensions.get("window").width * 0.8}]}>
                         <Text style={styles.title}>My Spellbooks</Text>
-                        <SpellList spells={this.props.spellbooks} onItemSelected={this.itemSelectedHandler}/>
-                        <Button title="Create new spellbook"/>
+                        <SpellbookList 
+                            spellbooks={this.props.spellbooks} 
+                            onItemSelected={this.itemSelectedHandler}
+                            selectedSpellbook={this.props.selectedSpellbook}
+                        />
                 </View>
         );
     }
@@ -42,7 +46,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
       spellbooks: state.rootReducer.spellbooks,
-      selectedSpellbook: state.rootReducer.spellbooks
+      selectedSpellbook: state.rootReducer.selectedSpellbook
     };
   };
 

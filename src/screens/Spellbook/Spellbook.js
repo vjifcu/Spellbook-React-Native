@@ -8,7 +8,6 @@ import SpellList from '../../components/SpellList';
 class Spellbook extends Component{
     constructor(props){
         super(props)
-        this.props.navigator.setDrawerEnabled({side: "left", enabled: false})
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
         this.props.navigator.setTitle({
             title: this.props.selectedSpellbook
@@ -16,8 +15,6 @@ class Spellbook extends Component{
     }
 
     componentWillReceiveProps(props){
-        console.log("Spellbook Received Props!!!")
-        console.log("Selected Spellbook: " + props.selectedSpellbook)
         this.props.navigator.setTitle({
             title: props.selectedSpellbook
         })
@@ -36,7 +33,6 @@ class Spellbook extends Component{
 
     itemSelectedHandler = key => {
         const selSpell = this.props.spells.find(spell => {
-          console.log(spell);
           return spell.name === key;
         })
         this.props.navigator.push({

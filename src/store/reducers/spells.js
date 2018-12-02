@@ -63,8 +63,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedSpellbook: state.spellbooks.find(function(obj){
-                    console.log(action.spellbookName)
-                    console.log(obj.name)
                     return obj.name == action.spellbookName
                 }).name
             }

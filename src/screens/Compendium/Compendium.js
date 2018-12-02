@@ -5,9 +5,24 @@ import { connect } from 'react-redux';
 import SpellList from '../../components/SpellList';
 
 class Compendium extends Component {
+  constructor(props){
+    super(props)
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+  }
+
+  onNavigatorEvent(event) {
+    switch(event.id){
+        case 'didAppear':
+        this.props.navigator.setDrawerEnabled({side: "left", enabled: true})
+        break;
+        case 'didDisappear':
+        this.props.navigator.setDrawerEnabled({side: "left", enabled: false})
+        break;
+    }
+  }
+
   itemSelectedHandler = key => {
     const selSpell = this.props.spells.find(spell => {
-      console.log(spell);
       return spell.name === key;
     })
     this.props.navigator.push({

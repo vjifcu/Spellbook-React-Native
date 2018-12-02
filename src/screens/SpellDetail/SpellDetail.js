@@ -24,6 +24,23 @@ class SpellDetail extends Component {
     return this.getOrdinal(level) + "-level " + school
   }
 
+  renderDescription = (text) => {
+    let result = []
+    let innerResult = []
+
+    text
+
+    for(let i = 0; i < text.length; i++){
+      for(let j = 0; j < text[i].length; j++){
+        innerResult.push(<Text style={[styles.spellText, {}]} key={text[i][j]}>{text[i][j]}</Text>)
+      }
+      result.push(<View style={{marginBottom: 20}}>{innerResult}</View>)
+      innerResult.length = 0
+    }
+
+    return result
+  }
+
   render() {
     return (
         <View style={styles.container}>
@@ -46,6 +63,15 @@ class SpellDetail extends Component {
                 <Text style={{fontWeight: "bold"}}>Duration: </Text>
                 <Text>{this.props.selectedSpell.duration}</Text>
               </Text>
+              <View style={{marginBottom: 20}}>
+                <Text>test</Text>
+                <Text>test2</Text>
+              </View>
+              <View style={{marginBottom: 20}}>
+                <Text>test</Text>
+                <Text>test2</Text>
+              </View>
+                {this.renderDescription(this.props.selectedSpell.text)}
           </View>
           <View>
             <TouchableOpacity onPress={this.props.onItemDeleted}>
