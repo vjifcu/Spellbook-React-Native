@@ -87,9 +87,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 28,
     color: "#7f000c"
-  },
-  deleteButton: {
-    alignItems: "center"
   }
 });
 

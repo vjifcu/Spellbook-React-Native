@@ -5,6 +5,7 @@ const listItem = (props) => (
   <TouchableOpacity onPress={props.onItemPressed}>
     <View style={[styles.listItem, props.style]}>
       <Text>{props.item.name}</Text>
+      <Text style={{textAlign: "right"}}>{props.item.level}</Text>
     </View>
   </TouchableOpacity>
 )
@@ -16,7 +17,8 @@ const listItem = (props) => (
       padding: 10,
       backgroundColor: "#eee",
       flexDirection: "row",
-      alignItems: "center"
+      justifyContent: "space-between"
+      //alignItems: "center"
     }
   });
   

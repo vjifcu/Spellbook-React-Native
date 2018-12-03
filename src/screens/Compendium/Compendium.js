@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Button, SectionList, FlatList} from 'react-native';
 import { connect } from 'react-redux';
+import { SearchBar } from "react-native-elements"
 
 import SpellList from '../../components/SpellList';
 
@@ -8,6 +9,13 @@ class Compendium extends Component {
   constructor(props){
     super(props)
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+
+    this.state = {
+      loading: false,
+      data: this.props.spells,
+      currentSearchText: null,
+      error: null
+    }
   }
 
   onNavigatorEvent(event) {
@@ -35,10 +43,46 @@ class Compendium extends Component {
     });
   }
 
+  searchFilterFunction = text => {    
+    if(this.state.currentSearchText === text.slice(0,-1))
+      this.filterSpells(this.state.data, text)
+    else
+      this.filterSpells(this.props.spells, text)
+
+  };
+
+  filterSpells(spellsToFilter, text) {
+    const newData = spellsToFilter.filter(item => {      
+      const itemData = item.name.toUpperCase();
+      const textData = text.toUpperCase();
+        
+      return itemData.split(" ").some(word =>{
+        return word.startsWith(textData)
+      })
+    });    
+
+    this.setState({ 
+      data: newData,
+      currentSearchText: text
+    });  
+  }
+
+  renderHeader() {
+    return (
+      <SearchBar
+        placeholder="Type Here..."
+        lightTheme
+        round
+        onChangeText={text => this.searchFilterFunction(text)}
+        autoCorrect={false}
+      />
+    );
+  }
+
   render() {
     return (
       <View>
-        <SpellList spells={this.props.spells} onItemSelected={this.itemSelectedHandler}/>
+        <SpellList spells={this.state.data} onItemSelected={this.itemSelectedHandler} header={this.renderHeader()}/>
       </View>
     );
   }

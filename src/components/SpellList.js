@@ -14,6 +14,7 @@ const spellList = props => {
           onItemPressed={() => props.onItemSelected(item.name)}
         />
       )}
+      ListHeaderComponent={props.header}
       keyExtractor={item => item.name}
     />
   );
