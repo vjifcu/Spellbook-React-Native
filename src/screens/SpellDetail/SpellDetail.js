@@ -5,10 +5,12 @@ import {
   Text,
   Button,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 
 import Icon from "react-native-vector-icons/FontAwesome";
+import cloneDeep from "lodash.clonedeep"
 
 class SpellDetail extends Component {
   getOrdinal(n) {
@@ -32,9 +34,9 @@ class SpellDetail extends Component {
 
     for(let i = 0; i < text.length; i++){
       for(let j = 0; j < text[i].length; j++){
-        innerResult.push(<Text style={[styles.spellText, {}]} key={text[i][j]}>{text[i][j]}</Text>)
+        innerResult.push(<Text style={[styles.spellText, {marginBottom: 4}]} key={text[i][j]}>{text[i][j]}</Text>)
       }
-      result.push(<View style={{marginBottom: 20}}>{innerResult}</View>)
+      result.push(<View style={{marginBottom: 12}} key={i}>{cloneDeep(innerResult)}</View>)
       innerResult.length = 0
     }
 
@@ -44,7 +46,7 @@ class SpellDetail extends Component {
   render() {
     return (
         <View style={styles.container}>
-          <View>
+          <ScrollView>
               <Text style={styles.spellName}>{this.props.selectedSpell.name}</Text>
               <Text style={{fontStyle: "italic", fontSize: 16}}>{this.subheading(this.props.selectedSpell.level, this.props.selectedSpell.school)}</Text>
               <Text style={styles.spellText}>
@@ -63,23 +65,10 @@ class SpellDetail extends Component {
                 <Text style={{fontWeight: "bold"}}>Duration: </Text>
                 <Text>{this.props.selectedSpell.duration}</Text>
               </Text>
-              <View style={{marginBottom: 20}}>
-                <Text>test</Text>
-                <Text>test2</Text>
-              </View>
-              <View style={{marginBottom: 20}}>
-                <Text>test</Text>
-                <Text>test2</Text>
-              </View>
+              <View style={{marginTop: 10}}>
                 {this.renderDescription(this.props.selectedSpell.text)}
-          </View>
-          <View>
-            <TouchableOpacity onPress={this.props.onItemDeleted}>
-              <View style={styles.deleteButton}>
-                <Icon size={30} name="trash-o" color="red" />
               </View>
-            </TouchableOpacity>
-          </View>
+          </ScrollView>
         </View>
     );
   }
@@ -87,7 +76,9 @@ class SpellDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 22
+    marginLeft: 12,
+    marginRight: 12,
+    flex: 1
   },
   spellText: {
     fontSize: 16
