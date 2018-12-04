@@ -62,7 +62,7 @@ class Spellbook extends Component{
 
     render() {
         return(
-            <View>
+            <View style={{flex:1}}>
                 <SpellList spells={this.getSpells(this.props.selectedSpellbook)} onItemSelected={this.itemSelectedHandler}/>
             </View>
         );

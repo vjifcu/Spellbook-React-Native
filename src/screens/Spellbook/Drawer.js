@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Button, StyleSheet, Dimensions, Platform} from 'react-native'
 import { connect } from 'react-redux';
-import { selectSpellbook } from '../../store/actions/index';
+import { selectSpellbook, createSpellbook } from '../../store/actions/index';
 
 import SpellList from '../../components/SpellList';
 import SpellbookList from '../../components/SpellbookList';
@@ -24,6 +24,7 @@ class Spellbook extends Component{
                             onItemSelected={this.itemSelectedHandler}
                             selectedSpellbook={this.props.selectedSpellbook}
                         />
+                        <Button title="Create new spellbook!" onPress={() => this.props.createSpellbook("New Spellbook")}/>
                 </View>
         );
     }
@@ -52,7 +53,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        selectSpellbook: (spellbookName) => dispatch(selectSpellbook(spellbookName))
+        selectSpellbook: (spellbookName) => dispatch(selectSpellbook(spellbookName)),
+        createSpellbook: (spellbookName) => dispatch(createSpellbook("ButtonSpellbook"))
     }
 }
   

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { connect } from 'react-redux';
 
-import SpellbookItem from "./ListItem";
+import SpellbookItem from "./SpellbookItem";
 
 class SpellbookList extends Component {
 

@@ -82,7 +82,10 @@ class Compendium extends Component {
   render() {
     return (
       <View>
-        <SpellList spells={this.state.data} onItemSelected={this.itemSelectedHandler} header={this.renderHeader()}/>
+        {this.renderHeader()}
+        <View>
+          <SpellList spells={this.state.data} onItemSelected={this.itemSelectedHandler}/>
+        </View>
       </View>
     );
   }

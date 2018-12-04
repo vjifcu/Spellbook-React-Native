@@ -49,7 +49,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 spellbooks: state.spellbooks.concat({
-                    name: action.spellbookName
+                    name: action.spellbookName,
+                    spells: [
+                        spellData[0].name,
+                        spellData[1].name
+                    ]
                 })
             }
         case DELETE_SPELLBOOK:
