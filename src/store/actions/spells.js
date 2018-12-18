@@ -14,10 +14,11 @@ export const deleteSpell = (spellName) => {
     };
 };
 
-export const createSpellbook = (spellbookName) => {
+export const createSpellbook = (spellbookName, spells) => {
     return {
         type: CREATE_SPELLBOOK,
-        spellbookName: spellbookName
+        spellbookName: spellbookName,
+        spells: spells
     }
 }
 

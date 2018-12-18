@@ -30,8 +30,6 @@ class SpellDetail extends Component {
     let result = []
     let innerResult = []
 
-    text
-
     for(let i = 0; i < text.length; i++){
       for(let j = 0; j < text[i].length; j++){
         innerResult.push(<Text style={[styles.spellText, {marginBottom: 4}]} key={text[i][j]}>{text[i][j]}</Text>)

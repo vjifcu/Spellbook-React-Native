@@ -1,14 +1,27 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-const listItem = (props) => (
-  <TouchableOpacity onPress={props.onItemPressed}>
-    <View style={[styles.listItem, props.style]}>
-      <Text>{props.item.name}</Text>
-      <Text style={{textAlign: "right"}}>{props.item.level}</Text>
-    </View>
-  </TouchableOpacity>
-)
+class ListItem extends PureComponent {
+
+render() {
+  const newStyle = {}
+    if (this.props.selected)
+  this.newStyle={backgroundColor: "red"}
+    else
+  this.newStyle={}
+
+  return(
+    <TouchableOpacity onPress={this.props.onItemPressed}>
+      <View style={[styles.listItem, this.props.style, this.newStyle]}>
+        <Text>{this.props.item.name}</Text>
+        <Text style={{textAlign: "right"}}>{this.props.item.level}</Text>
+      </View>
+    </TouchableOpacity>
+  )
+}
+
+
+}
 
   const styles = StyleSheet.create({
     listItem: {
@@ -22,5 +35,5 @@ const listItem = (props) => (
     }
   });
   
-  export default listItem;
+  export default ListItem;
   

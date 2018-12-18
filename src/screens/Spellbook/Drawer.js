@@ -15,6 +15,17 @@ class Spellbook extends Component{
         this.props.selectSpellbook(selSpellbook.name)
     }
 
+    createSpellbookHandler() {
+        this.props.navigator.showModal({
+            screen: "project.CreateSpellbookScreen",
+            title: "Create a new Spellbook!",
+            backButtonTitle: "Cancel",
+            passProps: {
+                dispatchCreateSpellbook: this.props.createSpellbook
+            }
+        })
+    }
+
     render() {
         return(
                 <View style={[styles.container,{width: Dimensions.get("window").width * 0.8}]}>
@@ -24,7 +35,7 @@ class Spellbook extends Component{
                             onItemSelected={this.itemSelectedHandler}
                             selectedSpellbook={this.props.selectedSpellbook}
                         />
-                        <Button title="Create new spellbook!" onPress={() => this.props.createSpellbook("New Spellbook")}/>
+                        <Button title="Create new spellbook!" onPress={() => this.createSpellbookHandler()}/>
                 </View>
         );
     }
@@ -54,7 +65,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         selectSpellbook: (spellbookName) => dispatch(selectSpellbook(spellbookName)),
-        createSpellbook: (spellbookName) => dispatch(createSpellbook("ButtonSpellbook"))
+        createSpellbook: (spellbookName, spells) => dispatch(createSpellbook(spellbookName, spells))
     }
 }
   

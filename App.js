@@ -11,6 +11,8 @@ import SpellbookScreen from './src/screens/Spellbook/Spellbook';
 import OptionsScreen from './src/screens/Options/Options';
 import SpellDetailScreen from "./src/screens/SpellDetail/SpellDetail"
 import DrawerScreen from "./src/screens/Spellbook/Drawer"
+import CreateSpellbookScreen from "./src/screens/Spellbook/CreateSpellbook"
+import ChooseSpellsScreen from "./src/screens/Spellbook/ChooseSpells"
 
 import spells from './res/data_file.json';
 
@@ -45,6 +47,18 @@ Navigation.registerComponent(
 Navigation.registerComponent(
   "project.DrawerScreen", () =>
   DrawerScreen,
+  store,
+  Provider
+)
+Navigation.registerComponent(
+  "project.CreateSpellbookScreen", () =>
+  CreateSpellbookScreen,
+  store,
+  Provider
+)
+Navigation.registerComponent(
+  "project.ChooseSpellsScreen", () =>
+  ChooseSpellsScreen,
   store,
   Provider
 )

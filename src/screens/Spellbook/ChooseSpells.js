@@ -5,13 +5,11 @@ import { SearchBar } from "react-native-elements"
 
 import SpellList from '../../components/SpellList';
 
-class Compendium extends Component {
+class ChooseSpells extends Component {
   constructor(props){
     super(props)
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
 
     this.state = {
-      loading: false,
       data: this.props.spells,
       currentSearchText: null,
       error: null,
@@ -19,29 +17,16 @@ class Compendium extends Component {
     }
   }
 
-  onNavigatorEvent(event) {
-    switch(event.id){
-        case 'didAppear':
-        this.props.navigator.setDrawerEnabled({side: "left", enabled: true})
-        break;
-        case 'didDisappear':
-        this.props.navigator.setDrawerEnabled({side: "left", enabled: false})
-        break;
-    }
-  }
-
   itemSelectedHandler = key => {
-    const selSpell = this.props.spells.find(spell => {
-      return spell.name === key;
+    this.setState((state) => {
+        const selected = new Map(state.selected)
+
+        this.state.selected.has(key) ?
+        selected.delete(key, !selected.get(key)) :
+        selected.set(key, !selected.get(key))
+
+        return {selected}
     })
-    this.props.navigator.push({
-      screen: "project.SpellDetailScreen",
-      title: selSpell.name,
-      backButtonTitle: "",
-      passProps: {
-        selectedSpell: selSpell
-      }
-    });
   }
 
   searchFilterFunction = text => {    
@@ -80,10 +65,16 @@ class Compendium extends Component {
     );
   }
 
+  createSpellbook(){
+    this.props.createSpellbook(this.props.name, Array.from(this.state.selected.keys()))
+    this.props.navigator.dismissModal()
+  }
+
   render() {
     return (
       <View>
         {this.renderHeader()}
+        <Button title="Create Spellbook" onPress={() => this.createSpellbook()}/>
         <View>
           <SpellList spells={this.state.data} onItemSelected={this.itemSelectedHandler} selected={this.state.selected}/>
         </View>
@@ -94,8 +85,13 @@ class Compendium extends Component {
 
 const mapStateToProps = state => {
   return {
-    spells: state.rootReducer.spells
+    spells: state.rootReducer.spells,
   };
 };
+const mapDispatchToProps = dispatch => {
+  return {
+      createSpellbook: (spellbookName, spells) => dispatch(createSpellbook(spellbookName, spells))
+  }
+}
 
-export default connect(mapStateToProps, null)(Compendium);
+export default connect(mapStateToProps, mapDispatchToProps)(ChooseSpells);
