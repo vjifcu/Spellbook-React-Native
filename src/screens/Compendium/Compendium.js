@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {View, Text, Button, SectionList, FlatList} from 'react-native';
+import {View, Text, SectionList, FlatList, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
-import { SearchBar } from "react-native-elements"
+import { SearchBar, Button } from "react-native-elements"
 
 import SpellList from '../../components/SpellList';
 
@@ -70,13 +70,19 @@ class Compendium extends Component {
 
   renderHeader() {
     return (
-      <SearchBar
-        placeholder="Type Here..."
-        lightTheme
-        round
-        onChangeText={text => this.searchFilterFunction(text)}
-        autoCorrect={false}
-      />
+      <View style={{flexDirection: "row"}}>
+        <TouchableOpacity style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+            <Text adjustsFontSizeToFit minimumFontScale={1.5} numberOfLines={1} style={{textAlignVertical: "center", textAlign: "center"}}>Filter</Text>
+        </TouchableOpacity>
+        <SearchBar containerStyle={{flex: 4}}
+          placeholder="Type Here..."
+          lightTheme
+          round
+          onChangeText={text => this.searchFilterFunction(text)}
+          autoCorrect={false}
+        />
+      </View>
+
     );
   }
 
