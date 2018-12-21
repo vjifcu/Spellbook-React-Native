@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {View, Text, SectionList, FlatList, TouchableOpacity} from 'react-native';
+import {View, Text, SectionList, FlatList, TouchableOpacity, Panel} from 'react-native';
 import { connect } from 'react-redux';
 import { SearchBar, Button } from "react-native-elements"
+import ExpandingPanel from '../../components/ExpandingPanel'
 
 import SpellList from '../../components/SpellList';
 
@@ -15,7 +16,8 @@ class Compendium extends Component {
       data: this.props.spells,
       currentSearchText: null,
       error: null,
-      selected: new Map()
+      selected: new Map(),
+      filter_sourcebook: null
     }
   }
 
@@ -72,7 +74,7 @@ class Compendium extends Component {
     return (
       <View style={{flexDirection: "row"}}>
         <TouchableOpacity style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
-            <Text adjustsFontSizeToFit minimumFontScale={1.5} numberOfLines={1} style={{textAlignVertical: "center", textAlign: "center"}}>Filter</Text>
+            <Text adjustsFontSizeToFit minimumFontScale={1.5} numberOfLines={2} style={{textAlignVertical: "center", textAlign: "center"}}>Filters{"\n"}v</Text>
         </TouchableOpacity>
         <SearchBar containerStyle={{flex: 4}}
           placeholder="Type Here..."
@@ -90,6 +92,7 @@ class Compendium extends Component {
     return (
       <View>
         {this.renderHeader()}
+        <ExpandingPanel></ExpandingPanel>
         <View>
           <SpellList spells={this.state.data} onItemSelected={this.itemSelectedHandler} selected={this.state.selected}/>
         </View>
